@@ -7,11 +7,11 @@
 </head>
 <body>
   <div class="container">
-    <h1>右键助手</h1>
+    <h2>右键助手</h2>
     
     <!-- 快捷方式列表 -->
     <div class="shortcuts-list">
-      <h2>快捷方式列表</h2>
+      <!-- <h2>快捷方式列表</h2> -->
       <div id="shortcuts-container">
         <!-- 快捷方式项会通过 JavaScript 动态添加到这里 -->
       </div>
@@ -22,11 +22,11 @@
 
     <!-- 添加快捷方式的表单 (默认隐藏) -->
     <div id="shortcut-form" class="shortcut-form hidden">
-      <h3>添加快捷方式</h3>
+      <h3>添加快捷方式:</h3>
       <input type="text" id="shortcut-name" placeholder="名称" required>
       <input type="text" id="shortcut-url" placeholder="URL" required>
       <div class="form-help">
-        支持的参数：
+        <p>支持的变量：</p>
         <ul>
           <li>{url} - 当前页面网址</li>
           <li>{title} - 当前页面标题</li>
@@ -34,12 +34,30 @@
         </ul>
       </div>
       <div class="form-buttons">
-        <button id="save-shortcut">保存</button>
         <button id="cancel-shortcut">取消</button>
+        <button id="save-shortcut">保存</button>
       </div>
     </div>
   </div>
-
+<!-- 自定义确认对话框 -->
+<div id="confirm-dialog" class="confirm-dialog hidden">
+  <div class="confirm-dialog-content">
+    <div class="confirm-dialog-message"></div>
+    <div class="confirm-dialog-buttons">
+      <button class="confirm-dialog-ok">删除</button>
+      <button class="confirm-dialog-cancel">取消</button>
+    </div>
+  </div>
+</div>
+<!-- 自定义提示对话框 -->
+<div id="alert-dialog" class="confirm-dialog hidden">
+  <div class="confirm-dialog-content">
+    <div class="confirm-dialog-message"></div>
+    <div class="confirm-dialog-buttons">
+      <button class="alert-dialog-ok">确定</button>
+    </div>
+  </div>
+</div>
   <script src="popup.js"></script>
 </body>
 </html>

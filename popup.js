@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // 设置事件监听器
 function setupEventListeners() {
   addShortcutBtn.addEventListener('click', showShortcutForm);
-  saveShortcutBtn.addEventListener('click', saveShortcut);
+  saveShortcutBtn.addEventListener('click', saveShortcut); 
   cancelShortcutBtn.addEventListener('click', hideShortcutForm);
 }
 
@@ -36,12 +36,12 @@ async function loadShortcuts() {
 // 创建快捷方式元素
 function createShortcutElement(shortcut) {
   const div = document.createElement('div');
-  div.className = `shortcut-item ${shortcut.system ? 'system-shortcut' : ''}`;
-  div.dataset.id = shortcut.id; // 添加 id 到 dataset
+  div.className = 'shortcut-item';
+  div.dataset.id = shortcut.id;
   div.innerHTML = `
     <div class="shortcut-info">
       <div class="shortcut-name">${shortcut.name}</div>
-      <div class="shortcut-url">${shortcut.url}</div>
+      <div class="shortcut-url" title="${shortcut.url}">${shortcut.url}</div>
     </div>
     <div class="shortcut-actions">
       <label class="toggle-switch">
@@ -61,21 +61,21 @@ function createShortcutElement(shortcut) {
   // 删除按钮事件
   const deleteBtn = div.querySelector('.delete-btn');
   deleteBtn.addEventListener('click', async () => {
-    if (confirm(`确定要删除"${shortcut.name}"吗？`)) {
+    const confirmed = await showConfirmDialog(`确定要删除"${shortcut.name}"吗？`);
+    if (confirmed) {
       div.remove();
       // 获取当前所有快捷方式
       const currentShortcuts = Array.from(shortcutsContainer.children).map(element => {
         const nameEl = element.querySelector('.shortcut-name');
         const urlEl = element.querySelector('.shortcut-url');
         const toggle = element.querySelector('input[type="checkbox"]');
-        const isSystem = element.classList.contains('system-shortcut');
         return {
           id: element.dataset.id,
           name: nameEl.textContent,
           url: urlEl.textContent,
           enabled: toggle.checked,
-          system: isSystem,
-          removable: !isSystem
+          system: false,
+          removable: true
         };
       });
       await saveShortcuts(currentShortcuts);
@@ -105,7 +105,7 @@ async function saveShortcut() {
   const url = shortcutUrlInput.value.trim();
 
   if (!name || !url) {
-    alert('请填写名称和URL');
+    await showAlertDialog('请填写名称和URL');
     return;
   }
 
@@ -159,6 +159,55 @@ async function handleToggleChange(shortcut, checkbox) {
   await saveShortcuts(updatedShortcuts);
 }
 
+// 自定义确认对话框
+function showConfirmDialog(message) {
+  return new Promise((resolve) => {
+    const dialog = document.getElementById('confirm-dialog');
+    const messageEl = dialog.querySelector('.confirm-dialog-message');
+    const cancelBtn = dialog.querySelector('.confirm-dialog-cancel');
+    const okBtn = dialog.querySelector('.confirm-dialog-ok');
+
+    messageEl.textContent = message;
+    dialog.classList.remove('hidden');
+
+    const handleCancel = () => {
+      dialog.classList.add('hidden');
+      cancelBtn.removeEventListener('click', handleCancel);
+      okBtn.removeEventListener('click', handleOk);
+      resolve(false);
+    };
+
+    const handleOk = () => {
+      dialog.classList.add('hidden');
+      cancelBtn.removeEventListener('click', handleCancel);
+      okBtn.removeEventListener('click', handleOk);
+      resolve(true);
+    };
+
+    cancelBtn.addEventListener('click', handleCancel);
+    okBtn.addEventListener('click', handleOk);
+  });
+}
+
+// 自定义提示对话框
+function showAlertDialog(message) {
+  return new Promise((resolve) => {
+    const dialog = document.getElementById('alert-dialog');
+    const messageEl = dialog.querySelector('.confirm-dialog-message');
+    const okBtn = dialog.querySelector('.alert-dialog-ok');
+
+    messageEl.textContent = message;
+    dialog.classList.remove('hidden');
+
+    const handleOk = () => {
+      dialog.classList.add('hidden');
+      okBtn.removeEventListener('click', handleOk);
+      resolve();
+    };
+
+    okBtn.addEventListener('click', handleOk);
+  });
+}
 
 // 获取设置选项的元素
 const emailCheckbox = document.getElementById('enableEmail');
