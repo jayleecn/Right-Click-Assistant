@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>右键助手</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>右键助手</h1>
+    
+    <!-- 快捷方式列表 -->
+    <div class="shortcuts-list">
+      <h2>快捷方式列表</h2>
+      <div id="shortcuts-container">
+        <!-- 快捷方式项会通过 JavaScript 动态添加到这里 -->
+      </div>
+    </div>
+
+    <!-- 添加新快捷方式按钮 -->
+    <button id="add-shortcut" class="add-button">添加快捷方式</button>
+
+    <!-- 添加快捷方式的表单 (默认隐藏) -->
+    <div id="shortcut-form" class="shortcut-form hidden">
+      <h3>添加快捷方式</h3>
+      <input type="text" id="shortcut-name" placeholder="名称" required>
+      <input type="text" id="shortcut-url" placeholder="URL" required>
+      <div class="form-help">
+        支持的参数：
+        <ul>
+          <li>{url} - 当前页面网址</li>
+          <li>{title} - 当前页面标题</li>
+          <li>{selectiontext} - 选中的文本</li>
+        </ul>
+      </div>
+      <div class="form-buttons">
+        <button id="save-shortcut">保存</button>
+        <button id="cancel-shortcut">取消</button>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
