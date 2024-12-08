@@ -51,14 +51,12 @@ async function updateContextMenus(shortcuts) {
     shortcuts = storedShortcuts;
   }
 
-  // 创建菜单项
+  // 只为启用的快捷方式创建菜单
   shortcuts.filter(s => s.enabled).forEach(shortcut => {
     chrome.contextMenus.create({
       id: shortcut.id,
       title: shortcut.name,
       contexts: ['selection'],
-      type: 'normal',
-      documentUrlPatterns: ['*://*/*', 'file:///*']
     });
   });
 }
@@ -68,16 +66,14 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   // 获取所有快捷方式
   const { shortcuts = [] } = await chrome.storage.sync.get('shortcuts');
   
-  // 查找对应的快捷方式
+  // 查找被点击的快捷方式
   const shortcut = shortcuts.find(s => s.id === info.menuItemId);
-  if (!shortcut) return;
-
-  // 替换URL中的变量
-  let url = shortcut.url;
-  url = url.replace('{url}', encodeURIComponent(tab.url));
-  url = url.replace('{title}', encodeURIComponent(tab.title));
-  url = url.replace('{selectiontext}', encodeURIComponent(info.selectionText || ''));
-
-  // 打开URL
-  chrome.tabs.create({ url });
+  
+  if (shortcut) {
+    // 替换选中文本
+    let url = shortcut.url.replace('{selectiontext}', encodeURIComponent(info.selectionText || ''));
+    
+    // 在新标签页中打开URL
+    chrome.tabs.create({ url });
+  }
 });

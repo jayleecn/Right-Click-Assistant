@@ -54,8 +54,7 @@ function createShortcutElement(shortcut) {
   // 切换开关事件
   const toggle = div.querySelector('input[type="checkbox"]');
   toggle.addEventListener('change', async () => {
-    shortcut.enabled = toggle.checked;
-    await saveShortcuts();
+    await handleToggleChange(shortcut, toggle);
   });
 
   // 删除按钮事件
@@ -113,37 +112,35 @@ async function saveShortcut() {
 }
 
 // 保存所有快捷方式
-async function saveShortcuts() {
-  const shortcuts = [];
-  
-  // 获取当前显示的所有快捷方式
-  document.querySelectorAll('.shortcut-item').forEach(el => {
-    const name = el.querySelector('.shortcut-name').textContent;
-    const url = el.querySelector('.shortcut-url').textContent;
-    const enabled = el.querySelector('input[type="checkbox"]').checked;
-    const id = el.dataset.id || Date.now().toString();
-    
-    shortcuts.push({
-      id,
-      name,
-      url,
-      enabled,
-      system: false,
-      removable: true
-    });
-  });
-
-  // 保存到存储
+async function saveShortcuts(shortcuts) {
   await chrome.storage.sync.set({ shortcuts });
-  updateContextMenus(shortcuts);
+  // 发送消息给 background.js 更新右键菜单
+  await chrome.runtime.sendMessage({ 
+    action: 'updateContextMenus',
+    shortcuts: shortcuts 
+  });
 }
 
 // 更新右键菜单
-function updateContextMenus(shortcuts) {
-  chrome.runtime.sendMessage({
-    action: 'updateContextMenus',
-    shortcuts: shortcuts.filter(s => s.enabled)
-  });
+async function updateContextMenus(shortcuts) {
+  try {
+    await chrome.runtime.sendMessage({ 
+      action: 'updateContextMenus',
+      shortcuts: shortcuts 
+    });
+  } catch (error) {
+    console.error('Failed to update context menus:', error);
+  }
+}
+
+// 切换开关事件处理
+async function handleToggleChange(shortcut, checkbox) {
+  shortcut.enabled = checkbox.checked;
+  const { shortcuts = [] } = await chrome.storage.sync.get('shortcuts');
+  const updatedShortcuts = shortcuts.map(s => 
+    s.id === shortcut.id ? shortcut : s
+  );
+  await saveShortcuts(updatedShortcuts);
 }
 
 // 获取设置选项的元素
@@ -166,42 +163,3 @@ textProcessCheckbox.addEventListener('change', (e) => {
   chrome.storage.sync.set({ enableTextProcess: e.target.checked });
   updateContextMenus();
 });
-
-// 更新右键菜单
-function updateContextMenus() {
-  chrome.storage.sync.get(['enableEmail', 'enableTextProcess'], (result) => {
-    // 移除所有现有菜单
-    chrome.contextMenus.removeAll(() => {
-      // 重新创建启用的菜单
-      if (result.enableEmail !== false) {
-        chrome.contextMenus.create({
-          id: "sendEmail",
-          title: "发送邮件",
-          contexts: ["selection", "link"]
-        });
-      }
-
-      if (result.enableTextProcess !== false) {
-        chrome.contextMenus.create({
-          id: "textProcess",
-          title: "文本处理",
-          contexts: ["selection"]
-        });
-
-        chrome.contextMenus.create({
-          id: "upperCase",
-          parentId: "textProcess",
-          title: "转换为大写",
-          contexts: ["selection"]
-        });
-
-        chrome.contextMenus.create({
-          id: "lowerCase",
-          parentId: "textProcess",
-          title: "转换为小写",
-          contexts: ["selection"]
-        });
-      }
-    });
-  });
-}
