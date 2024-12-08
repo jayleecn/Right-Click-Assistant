@@ -15,7 +15,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
         id: 'perplexity',
         name: 'Perplexity',
         url: 'https://www.perplexity.ai/?q={text_selected}',
-        enabled: true,
+        enabled: false,
         system: true,
         removable: true
       },
@@ -23,7 +23,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
         id: 'google',
         name: 'Google搜索',
         url: 'https://www.google.com/search?q={text_selected}',
-        enabled: true,
+        enabled: false,
         system: true,
         removable: true
       },
@@ -31,7 +31,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
         id: 'x_search',
         name: 'X 搜索',
         url: 'https://x.com/search?q={text_selected}',
-        enabled: true,
+        enabled: false,
         system: true,
         removable: true
       },
@@ -39,7 +39,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
         id: 'baidu',
         name: 'Baidu搜索',
         url: 'https://www.baidu.com/s?wd={text_selected}',
-        enabled: true,
+        enabled: false,
         system: true,
         removable: true
       }
