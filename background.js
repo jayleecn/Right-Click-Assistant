@@ -6,7 +6,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
       {
         id: 'baidu',
         name: 'Baidu搜索',
-        url: 'https://www.baidu.com/s?wd={selectiontext}',
+        url: 'https://www.baidu.com/s?wd={text_selected}',
         enabled: true,
         system: true,
         removable: true
@@ -14,7 +14,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
       {
         id: 'google',
         name: 'Google搜索',
-        url: 'https://www.google.com/search?q={selectiontext}',
+        url: 'https://www.google.com/search?q={text_selected}',
         enabled: true,
         system: true,
         removable: true
@@ -22,7 +22,15 @@ chrome.runtime.onInstalled.addListener(async (details) => {
       {
         id: 'email',
         name: '发送邮件',
-        url: 'mailto:?body={selectiontext}',
+        url: 'mailto:?body={text_selected}',
+        enabled: true,
+        system: true,
+        removable: true
+      },
+      {
+        id: 'twitter',
+        name: '分享到 X',
+        url: 'https://twitter.com/intent/tweet?text={text_selected}&url={url}&title={title}',
         enabled: true,
         system: true,
         removable: true
@@ -70,8 +78,11 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   const shortcut = shortcuts.find(s => s.id === info.menuItemId);
   
   if (shortcut) {
-    // 替换选中文本
-    let url = shortcut.url.replace('{selectiontext}', encodeURIComponent(info.selectionText || ''));
+    // 替换选中文本、当前页面 URL 和标题
+    let url = shortcut.url
+      .replace('{text_selected}', encodeURIComponent(info.selectionText || ''))
+      .replace('{url}', encodeURIComponent(tab.url || ''))
+      .replace('{title}', encodeURIComponent(tab.title || ''));
     
     // 在新标签页中打开URL
     chrome.tabs.create({ url });

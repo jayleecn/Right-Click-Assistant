@@ -37,6 +37,7 @@ async function loadShortcuts() {
 function createShortcutElement(shortcut) {
   const div = document.createElement('div');
   div.className = `shortcut-item ${shortcut.system ? 'system-shortcut' : ''}`;
+  div.dataset.id = shortcut.id; // 添加 id 到 dataset
   div.innerHTML = `
     <div class="shortcut-info">
       <div class="shortcut-name">${shortcut.name}</div>
@@ -62,7 +63,22 @@ function createShortcutElement(shortcut) {
   deleteBtn.addEventListener('click', async () => {
     if (confirm(`确定要删除"${shortcut.name}"吗？`)) {
       div.remove();
-      await saveShortcuts();
+      // 获取当前所有快捷方式
+      const currentShortcuts = Array.from(shortcutsContainer.children).map(element => {
+        const nameEl = element.querySelector('.shortcut-name');
+        const urlEl = element.querySelector('.shortcut-url');
+        const toggle = element.querySelector('input[type="checkbox"]');
+        const isSystem = element.classList.contains('system-shortcut');
+        return {
+          id: element.dataset.id,
+          name: nameEl.textContent,
+          url: urlEl.textContent,
+          enabled: toggle.checked,
+          system: isSystem,
+          removable: !isSystem
+        };
+      });
+      await saveShortcuts(currentShortcuts);
     }
   });
 
@@ -108,7 +124,7 @@ async function saveShortcut() {
 
   shortcutsContainer.appendChild(createShortcutElement(shortcut));
   hideShortcutForm();
-  updateContextMenus([...shortcuts]);
+  updateContextMenus(shortcuts);
 }
 
 // 保存所有快捷方式
@@ -143,15 +159,18 @@ async function handleToggleChange(shortcut, checkbox) {
   await saveShortcuts(updatedShortcuts);
 }
 
+
 // 获取设置选项的元素
 const emailCheckbox = document.getElementById('enableEmail');
 const textProcessCheckbox = document.getElementById('enableTextProcess');
+
 
 // 从存储中加载设置
 chrome.storage.sync.get(['enableEmail', 'enableTextProcess'], (result) => {
   emailCheckbox.checked = result.enableEmail !== false;
   textProcessCheckbox.checked = result.enableTextProcess !== false;
 });
+
 
 // 保存设置变更
 emailCheckbox.addEventListener('change', (e) => {
