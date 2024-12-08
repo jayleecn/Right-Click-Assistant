@@ -2,13 +2,12 @@
   "manifest_version": 3,
   "name": "右键助手",
   "version": "1.0.0",
-  "description": "强大的右键菜单增强工具，支持邮件发送、文本处理等多种功能",
+  "description": "便捷的右键菜单工具，支持快速搜索、发送邮件和社交分享功能",
+  "author": "Jay",
   "permissions": [
     "contextMenus",
     "storage",
-    "activeTab",
-    "clipboardWrite",
-    "clipboardRead"
+    "activeTab"
   ],
   "host_permissions": [
     "*://*/*"
@@ -31,6 +30,8 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "commands": {},
-  "minimum_chrome_version": "88"
+  "minimum_chrome_version": "88",
+  "homepage_url": "https://github.com/your-username/right_click",
+  "short_name": "右键助手",
+  "offline_enabled": true
 }
