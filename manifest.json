@@ -1,11 +1,17 @@
 {
   "manifest_version": 3,
   "name": "右键助手",
-  "description": "快速添加和管理自定义右键菜单项，支持搜索、分享等多种功能",
-  "version": "1.0",
+  "version": "1.0.0",
+  "description": "强大的右键菜单增强工具，支持邮件发送、文本处理等多种功能",
   "permissions": [
     "contextMenus",
-    "storage"
+    "storage",
+    "activeTab",
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  "host_permissions": [
+    "*://*/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -24,5 +30,7 @@
     "32": "icons/icon32.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
-  }
+  },
+  "commands": {},
+  "minimum_chrome_version": "88"
 }
