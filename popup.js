@@ -23,11 +23,19 @@ function setupEventListeners() {
 // 加载快捷方式
 async function loadShortcuts() {
   const { shortcuts = [] } = await chrome.storage.sync.get('shortcuts');
+  const shortcutsContainer = document.getElementById('shortcuts-container');
+  const shortcutsList = document.querySelector('.shortcuts-list');
   
   shortcutsContainer.innerHTML = '';
-  shortcuts.forEach(shortcut => {
-    shortcutsContainer.appendChild(createShortcutElement(shortcut));
-  });
+  
+  if (shortcuts.length === 0) {
+    shortcutsList.style.display = 'none';
+  } else {
+    shortcutsList.style.display = 'block';
+    shortcuts.forEach(shortcut => {
+      shortcutsContainer.appendChild(createShortcutElement(shortcut));
+    });
+  }
   
   // 更新右键菜单
   updateContextMenus(shortcuts);
@@ -78,6 +86,13 @@ function createShortcutElement(shortcut) {
           removable: true
         };
       });
+
+      // 如果没有快捷方式了，隐藏列表容器
+      const shortcutsList = document.querySelector('.shortcuts-list');
+      if (currentShortcuts.length === 0) {
+        shortcutsList.style.display = 'none';
+      }
+
       await saveShortcuts(currentShortcuts);
     }
   });
