@@ -46,29 +46,36 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     ];
     await chrome.storage.sync.set({ shortcuts: defaultShortcuts });
   }
-  await updateContextMenus();
+});
+
+// 清除所有右键菜单
+chrome.runtime.onStartup.addListener(() => {
+  chrome.contextMenus.removeAll();
 });
 
 // 监听来自popup的消息
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'updateContextMenus') {
-    updateContextMenus(message.shortcuts);
+    createContextMenus(message.shortcuts);
   }
 });
 
-// 更新右键菜单
-async function updateContextMenus(shortcuts) {
-  // 清除所有现有菜单
+// 创建右键菜单
+async function createContextMenus(shortcuts) {
+  // 先清除所有现有菜单
   await chrome.contextMenus.removeAll();
-
+  
   // 如果没有提供快捷方式，从存储中加载
   if (!shortcuts) {
     const { shortcuts: storedShortcuts = [] } = await chrome.storage.sync.get('shortcuts');
     shortcuts = storedShortcuts;
   }
-
-  // 只为启用的快捷方式创建菜单
-  shortcuts.filter(s => s.enabled).forEach(shortcut => {
+  
+  // 获取所有启用的快捷方式
+  const enabledShortcuts = shortcuts.filter(shortcut => shortcut.enabled);
+  
+  // 为每个启用的快捷方式创建一级菜单项
+  enabledShortcuts.forEach(shortcut => {
     chrome.contextMenus.create({
       id: shortcut.id,
       title: shortcut.name,
@@ -76,6 +83,16 @@ async function updateContextMenus(shortcuts) {
     });
   });
 }
+
+// 监听存储变化，更新右键菜单
+chrome.storage.onChanged.addListener((changes) => {
+  if (changes.shortcuts) {
+    createContextMenus();
+  }
+});
+
+// 初始化右键菜单
+createContextMenus();
 
 // 处理右键菜单点击事件
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
