@@ -31,7 +31,8 @@
     "128": "icons/icon128.png"
   },
   "minimum_chrome_version": "88",
-  "homepage_url": "https://github.com/jayleecn/right_click",
-  "short_name": "Right Click Search",
-  "offline_enabled": true
+  "homepage_url": "https://github.com/jayleecn/Right-Click-Assistant",
+  "short_name": "Right Click",
+  "offline_enabled": true,
+  "privacy_policy": "https://jayleecn.github.io/Right-Click-Assistant/privacy.html"
 }
