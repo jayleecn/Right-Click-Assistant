@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "右键助手",
   "version": "0.1.0",
-  "description": "便捷的右键菜单工具，支持快速搜索、发送邮件和社交分享，可自定义快捷方式。支持Baidu、Google搜索，邮件发送，分享到X等功能",
+  "description": "新一代右键菜单搜索工具，优先支持AI搜索(ChatGPT、Perplexity)，集成Google、X、Baidu等传统搜索，支持自定义搜索引擎",
   "author": "Jay",
   "permissions": [
     "contextMenus",
@@ -32,6 +32,6 @@
   },
   "minimum_chrome_version": "88",
   "homepage_url": "https://github.com/your-username/right_click",
-  "short_name": "右键助手",
+  "short_name": "右键搜索",
   "offline_enabled": true
 }

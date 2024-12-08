@@ -4,9 +4,17 @@ chrome.runtime.onInstalled.addListener(async (details) => {
   if (details.reason === 'install') {
     const defaultShortcuts = [
       {
-        id: 'baidu',
-        name: 'Baidu搜索',
-        url: 'https://www.baidu.com/s?wd={text_selected}',
+        id: 'chatgpt',
+        name: 'ChatGPT',
+        url: 'https://chatgpt.com/?q={text_selected}',
+        enabled: true,
+        system: true,
+        removable: true
+      },
+      {
+        id: 'perplexity',
+        name: 'Perplexity',
+        url: 'https://www.perplexity.ai/?q={text_selected}',
         enabled: true,
         system: true,
         removable: true
@@ -20,17 +28,17 @@ chrome.runtime.onInstalled.addListener(async (details) => {
         removable: true
       },
       {
-        id: 'email',
-        name: '发送邮件',
-        url: 'mailto:?body={text_selected}',
+        id: 'x_search',
+        name: 'X 搜索',
+        url: 'https://x.com/search?q={text_selected}',
         enabled: true,
         system: true,
         removable: true
       },
       {
-        id: 'twitter',
-        name: '分享到 X',
-        url: 'https://twitter.com/intent/tweet?text={text_selected}&url={url}&title={title}',
+        id: 'baidu',
+        name: 'Baidu搜索',
+        url: 'https://www.baidu.com/s?wd={text_selected}',
         enabled: true,
         system: true,
         removable: true
