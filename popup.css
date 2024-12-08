@@ -133,7 +133,7 @@ input:checked + .slider:before {
   color: #c82333;
 }
 
-/* 统一按钮基础样式 */
+/* Unified button base styles */
 button {
   height: 32px;
   padding: 0 16px;
@@ -216,7 +216,7 @@ button {
   color: #333;
 }
 
-/* 确认对话框样式 */
+/* Confirm dialog styles */
 .confirm-dialog {
   position: fixed;
   top: 0;

@@ -1,81 +1,81 @@
-# 右键助手
+# Right Click Assistant
 
-一个新一代的浏览器右键菜单工具，优先提供AI搜索能力，同时支持传统搜索引擎。支持自定义搜索引擎，让您的搜索体验更加智能和高效。
+A next-generation browser right-click menu tool that prioritizes AI search capabilities while supporting traditional search engines. Features custom search engine support for a smarter and more efficient search experience.
 
-## ✨ 主要功能
+## ✨ Key Features
 
-- 🤖 AI 搜索（优先）
-  - ChatGPT：一键发送文本到 ChatGPT 进行分析
-  - Perplexity：使用 Perplexity 智能分析文本
-- 🔍 传统搜索
-  - Google搜索：使用Google搜索选中内容
-  - X搜索：在X平台搜索相关内容
-  - Baidu搜索：使用百度搜索选中文本
-- ⚡️ 自定义搜索引擎
-  - 添加新搜索引擎：可自定义URL模板
-  - 管理现有搜索引擎：启用/禁用、编辑、删除
-  - 支持变量：{text_selected}、{url}、{title}
+- 🤖 AI Search (Priority)
+  - ChatGPT: One-click text analysis with ChatGPT
+  - Perplexity: Intelligent text analysis using Perplexity
+- 🔍 Traditional Search
+  - Google Search: Search selected content with Google
+  - X Search: Find related content on X platform
+  - Baidu Search: Search selected text using Baidu
+- ⚡️ Custom Search Engines
+  - Add New Engines: Customize with URL templates
+  - Manage Existing Engines: Enable/disable, edit, delete
+  - Variable Support: {text_selected}, {url}, {title}
 
-## 🚀 使用方法
+## 🚀 How to Use
 
-1. 从 Chrome 网上应用店安装本扩展
-2. 在浏览器中选中任意文本，点击右键
-3. 在右键菜单中选择需要的搜索方式：
-   - AI搜索：使用ChatGPT或Perplexity进行智能分析
-   - 传统搜索：使用Google、X或Baidu进行搜索
-4. 点击工具栏的扩展图标，可以：
-   - 添加和管理自定义搜索引擎
-   - 自定义显示的菜单项
-   - 开启/关闭特定功能
+1. Install the extension from Chrome Web Store
+2. Select any text in your browser and right-click
+3. Choose your preferred search method:
+   - AI Search: Use ChatGPT or Perplexity for intelligent analysis
+   - Traditional Search: Use Google, X, or Baidu
+4. Click the extension icon in the toolbar to:
+   - Add and manage custom search engines
+   - Customize menu items
+   - Enable/disable specific features
 
-## 🔧 自定义搜索引擎说明
+## 🔧 Custom Search Engine Guide
 
-在扩展的设置面板中，您可以：
-1. 添加新的搜索引擎
-   - 设置搜索引擎名称
-   - 配置搜索URL模板
-   - 使用变量：
-     - {text_selected}：选中的文本
-     - {url}：当前页面URL
-     - {title}：当前页面标题
-2. 管理现有搜索引擎
-   - 启用/禁用特定搜索引擎
-   - 编辑搜索引擎设置
-   - 删除不需要的搜索引擎
+In the extension settings panel, you can:
+1. Add New Search Engines
+   - Set engine name
+   - Configure search URL template
+   - Use variables:
+     - {text_selected}: Selected text
+     - {url}: Current page URL
+     - {title}: Current page title
+2. Manage Existing Search Engines
+   - Enable/disable specific engines
+   - Edit engine settings
+   - Remove unwanted engines
 
-## 🔒 隐私与安全
+## 🔒 Privacy & Security
 
-- 本地处理：所有操作均在本地完成
-- 最小权限：仅请求必要的浏览器权限
-- 无数据收集：不收集任何用户数据
-- 开源透明：代码完全开源，欢迎检查
+- Local Processing: All operations completed locally
+- Minimal Permissions: Only necessary browser permissions requested
+- No Data Collection: No user data is collected
+- Open Source: Code is fully open source and available for inspection
 
-## 🔧 技术规格
+## 🔧 Technical Specifications
 
-- 开发框架：Chrome Extension Manifest V3
-- 兼容版本：Chrome 88+
-- 支持平台：Windows、macOS、Linux
-- 所需权限：
-  - contextMenus：用于创建右键菜单
-  - storage：保存用户设置
-  - activeTab：访问当前标签页信息
+- Development Framework: Chrome Extension Manifest V3
+- Compatible Versions: Chrome 88+
+- Supported Platforms: Windows, macOS, Linux
+- Required Permissions:
+  - contextMenus: For creating right-click menu
+  - storage: For saving user settings
+  - activeTab: For accessing current tab information
 
-## 📝 更新日志
+## 📝 Changelog
 
-### 版本 0.1.0 (2024-12-08)
-- ✨ 首次发布
-- 🤖 优先支持ChatGPT/Perplexity AI搜索
-- 🔍 集成Google/X/Baidu传统搜索
-- ⚙️ 支持自定义搜索引擎
+### Version 0.1.0 (2024-12-08)
+- ✨ Initial release
+- 🤖 Priority support for ChatGPT/Perplexity AI search
+- 🔍 Integration with Google/X/Baidu traditional search
+- ⚙️ Custom search engine support
 
-## 🤝 参与贡献
+## 🤝 Contributing
 
-欢迎提交问题和建议！您可以通过以下方式参与：
+We welcome issues and suggestions! You can contribute by:
 
-1. 提交 Issue
-2. 提出新功能建议
-3. 提交 Pull Request
+1. Submitting Issues
+2. Suggesting New Features
+3. Creating Pull Requests
 
-## 📜 开源协议
+## 📜 License
 
-本项目采用 MIT 协议开源，欢迎自由使用和分发。
+This project is open-source under the MIT License. Feel free to use and distribute.

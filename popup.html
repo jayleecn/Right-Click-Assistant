@@ -2,62 +2,62 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>右键助手</title>
+  <title>Right Click Assistant</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <img src="icons/icon32.png" alt="右键助手图标" class="header-icon">
-      <h2>右键助手</h2>
+      <img src="icons/icon32.png" alt="Right Click Assistant Icon" class="header-icon">
+      <h2>Right Click Assistant</h2>
     </div>
     
-    <!-- 快捷方式列表 -->
+    <!-- Shortcuts List -->
     <div class="shortcuts-list">
-      <!-- <h2>快捷方式列表</h2> -->
+      <!-- <h2>Shortcuts List</h2> -->
       <div id="shortcuts-container">
-        <!-- 快捷方式项会通过 JavaScript 动态添加到这里 -->
+        <!-- Shortcuts will be dynamically added here -->
       </div>
     </div>
 
-    <!-- 添加新快捷方式按钮 -->
-    <button id="add-shortcut" class="add-button">添加快捷方式</button>
+    <!-- Add New Shortcut Button -->
+    <button id="add-shortcut" class="add-button">Add Shortcut</button>
 
-    <!-- 添加快捷方式的表单 (默认隐藏) -->
+    <!-- Add Shortcut Form (Hidden by default) -->
     <div id="shortcut-form" class="shortcut-form hidden">
-      <h3>添加快捷方式:</h3>
-      <input type="text" id="shortcut-name" placeholder="名称" required>
+      <h3>Add Shortcut:</h3>
+      <input type="text" id="shortcut-name" placeholder="Name" required>
       <input type="text" id="shortcut-url" placeholder="URL" required>
       <div class="form-help">
-        <p>支持的变量：</p>
+        <p>Supported variables:</p>
         <ul>
-          <li>{url} - 当前页面网址</li>
-          <li>{title} - 当前页面标题</li>
-          <li>{text_selected} - 选中的文本</li>
+          <li>{url} - Current page URL</li>
+          <li>{title} - Current page title</li>
+          <li>{text_selected} - Selected text</li>
         </ul>
       </div>
       <div class="form-buttons">
-        <button id="cancel-shortcut">取消</button>
-        <button id="save-shortcut">保存</button>
+        <button id="cancel-shortcut">Cancel</button>
+        <button id="save-shortcut">Save</button>
       </div>
     </div>
   </div>
-<!-- 自定义确认对话框 -->
+<!-- Confirm Dialog -->
 <div id="confirm-dialog" class="confirm-dialog hidden">
   <div class="confirm-dialog-content">
     <div class="confirm-dialog-message"></div>
     <div class="confirm-dialog-buttons">
-      <button class="confirm-dialog-ok">删除</button>
-      <button class="confirm-dialog-cancel">取消</button>
+      <button class="confirm-dialog-ok">Delete</button>
+      <button class="confirm-dialog-cancel">Cancel</button>
     </div>
   </div>
 </div>
-<!-- 自定义提示对话框 -->
+<!-- Alert Dialog -->
 <div id="alert-dialog" class="confirm-dialog hidden">
   <div class="confirm-dialog-content">
     <div class="confirm-dialog-message"></div>
     <div class="confirm-dialog-buttons">
-      <button class="alert-dialog-ok">确定</button>
+      <button class="alert-dialog-ok">OK</button>
     </div>
   </div>
 </div>

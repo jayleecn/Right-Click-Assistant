@@ -21,7 +21,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
       },
       {
         id: 'google',
-        name: 'Google搜索',
+        name: 'Google Search',
         url: 'https://www.google.com/search?q={text_selected}',
         enabled: false,
         system: true,
@@ -29,7 +29,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
       },
       {
         id: 'x_search',
-        name: 'X 搜索',
+        name: 'X Search',
         url: 'https://x.com/search?q={text_selected}',
         enabled: false,
         system: true,
@@ -37,7 +37,7 @@ chrome.runtime.onInstalled.addListener(async (details) => {
       },
       {
         id: 'baidu',
-        name: 'Baidu搜索',
+        name: 'Baidu Search',
         url: 'https://www.baidu.com/s?wd={text_selected}',
         enabled: false,
         system: true,

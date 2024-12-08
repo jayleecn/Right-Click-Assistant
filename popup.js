@@ -61,7 +61,7 @@ function createShortcutElement(shortcut) {
   // 删除按钮事件
   const deleteBtn = div.querySelector('.delete-btn');
   deleteBtn.addEventListener('click', async () => {
-    const confirmed = await showConfirmDialog(`确定要删除"${shortcut.name}"吗？`);
+    const confirmed = await showConfirmDialog(`Are you sure you want to delete "${shortcut.name}"?`);
     if (confirmed) {
       div.remove();
       // 获取当前所有快捷方式
@@ -105,7 +105,7 @@ async function saveShortcut() {
   const url = shortcutUrlInput.value.trim();
 
   if (!name || !url) {
-    await showAlertDialog('请填写名称和URL');
+    await showAlertDialog('Please enter both name and URL');
     return;
   }
 
