@@ -62,8 +62,8 @@ In the extension settings panel, you can:
 
 ## 📝 Changelog
 
-### Version 0.1.1 (2024-12-14)
-- Update .gitignore to exclude Archive.zip
+### [Version 0.1.1 (2024-12-14)](#version-011)
+- 🎨 Add link to header and update style
 
 ### Version 0.1.0 (2024-12-08)
 - ✨ Initial release
