@@ -287,10 +287,16 @@ button {
   background-color: #1976D2;
 }
 
-.header {
+.header a {
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
   padding: 4px 0;
 }

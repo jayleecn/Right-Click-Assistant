@@ -18,7 +18,7 @@ A next-generation browser right-click menu tool that prioritizes AI search capab
 
 ## 🚀 How to Use
 
-1. Install the extension from Chrome Web Store
+1. Install the extension from [Chrome Web Store](https://chromewebstore.google.com/detail/right-click-assistant/naebpmldncffaicbbckajajogemnbjlh)
 2. Select any text in your browser and right-click
 3. Choose your preferred search method:
    - AI Search: Use ChatGPT or Perplexity for intelligent analysis
