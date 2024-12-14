@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Right Click Assistant",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Smart right-click menu combining AI search (ChatGPT) and traditional search. Fully customizable.",
   "author": "Jay",
   "permissions": [
